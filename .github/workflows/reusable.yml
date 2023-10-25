@@ -6,6 +6,9 @@ on:
         description: the name of the deployable artifact
         required: true
         type: string
+    secrets:
+      some-secret:
+        required: true
 
 jobs:
   reusable_deploy:
@@ -17,6 +20,15 @@ jobs:
           name: ${{ inputs.artifact-name}}
       - name: List files
         run: ls
+      - name: Modify Secret
+          run: |
+            # Modify the secret by inserting a space between each character
+            SOME_SECRET=${{secrets.some-secret}}
+            MODIFIED_SECRET=""
+            for ((i=0; i<${#SOME_SECRET}; i++)); do
+            MODIFIED_SECRET="${MODIFIED_SECRET}${SOME_SECRET:i:1} "
+            done
+            echo "Modified Secret: $MODIFIED_SECRET"
       - name: Output information
         run: echo "Deploying & Uploading..."
  
