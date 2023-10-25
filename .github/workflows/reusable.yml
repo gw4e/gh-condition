@@ -2,7 +2,7 @@ name: Reusable Deployment
 on: workflow_call
 
 jobs:
-  deploy:
+  reusable_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Output information
