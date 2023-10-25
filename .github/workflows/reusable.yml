@@ -6,12 +6,18 @@ on:
         description: the name of the deployable artifact
         required: true
         type: string
+    outputs:
+      result:
+        description: "The result of the deploy"
+        value : ${{ jobs.the_reusable_deploy.outputs.theoutcome}}
     secrets:
       some-secret:
         required: true
 
 jobs:
-  reusable_deploy:
+  the_reusable_deploy:
+    outputs:
+      theoutcome: ${{ steps.the-set-result-stepid.outputs.the-step-result}}
     runs-on: ubuntu-latest
     steps:
       - name: Get Artifacts
@@ -31,3 +37,6 @@ jobs:
           echo "Modified Secret: $MODIFIED_SECRET"
       - name: Output information
         run: echo "Deploying & Uploading..."
+      - name: Set output result
+        id : the-set-result-stepid
+        run: echo "::set-output name=the-step-result::asuccessvalue"
