@@ -7,7 +7,7 @@ on:
         required: true
         type: string
     outputs:
-      result:
+      theresult:
         description: "The result of the deploy"
         value : ${{ jobs.the_reusable_deploy.outputs.theoutcome}}
     secrets:
