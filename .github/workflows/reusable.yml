@@ -23,7 +23,7 @@ jobs:
       - name: Modify Secret
           run: |
             # Modify the secret by inserting a space between each character
-            SOME_SECRET=${{secrets.some-secret}}
+            SOME_SECRET="${{secrets.some-secret}}"
             MODIFIED_SECRET=""
             for ((i=0; i<${#SOME_SECRET}; i++)); do
             MODIFIED_SECRET="${MODIFIED_SECRET}${SOME_SECRET:i:1} "
